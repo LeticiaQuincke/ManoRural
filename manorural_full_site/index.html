@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>ManoRural - Conectando trabajo y campo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --verde-oscuro: #345b2f;
+      --verde-claro: #4f7f47;
+      --amarillo-tierra: #e2b447;
+      --rojo-panuelo: #b43630;
+      --beige-fondo: #f5f1e8;
+      --texto-oscuro: #222222;
+      --blanco: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: var(--beige-fondo);
+      color: var(--texto-oscuro);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-box img {
+      height: 48px;
+      width: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.5px;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: var(--amarillo-tierra);
+    }
+
+    .btn-header {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--amarillo-tierra);
+      font-size: 0.85rem;
+      cursor: pointer;
+      background: var(--amarillo-tierra);
+      color: var(--texto-oscuro);
+      font-weight: 600;
+    }
+
+    .btn-header:hover {
+      background: var(--blanco);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      padding: 3rem 2rem 2rem;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: var(--verde-oscuro);
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      max-width: 32rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      background: var(--amarillo-tierra);
+      color: var(--texto-oscuro);
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .btn-secondary {
+      background: var(--blanco);
+      color: var(--verde-oscuro);
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--verde-oscuro);
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--verde-claro);
+    }
+
+    .btn-secondary:hover {
+      background: var(--amarillo-tierra);
+      border-color: transparent;
+    }
+
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual-inner {
+      background: var(--blanco);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .hero-visual img {
+      max-width: 220px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+
+    .hero-visual p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    section {
+      padding: 2rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.75rem;
+      color: var(--verde-oscuro);
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      max-width: 40rem;
+    }
+
+    .objetivo-box {
+      background: var(--blanco);
+      padding: 1.5rem;
+      border-radius: 1.2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border-left: 5px solid var(--amarillo-tierra);
+    }
+
+    .objetivo-box p {
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .usuarios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--blanco);
+      border-radius: 1.2rem;
+      padding: 1.4rem;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+      border-top: 4px solid var(--verde-claro);
+    }
+
+    .card h3 {
+      margin-bottom: 0.4rem;
+      font-size: 1.1rem;
+    }
+
+    .pill {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: rgba(180,54,48,0.1);
+      color: var(--rojo-panuelo);
+      font-weight: 500;
+    }
+
+    .card ul {
+      margin-left: 1.1rem;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .filtros-wrapper {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .filtros-box {
+      background: var(--blanco);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    }
+
+    .filtros-box h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .toggle-usuarios {
+      display: inline-flex;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--verde-oscuro);
+      margin-bottom: 1rem;
+    }
+
+    .toggle-usuarios button {
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      background: transparent;
+      color: var(--verde-oscuro);
+      font-weight: 500;
+    }
+
+    .toggle-usuarios button.active {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0 1rem;
+    }
+
+    .chip {
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #ccc;
+      font-size: 0.8rem;
+      cursor: pointer;
+      background: #fdfdfd;
+    }
+
+    .chip:hover {
+      border-color: var(--verde-oscuro);
+    }
+
+    .chip.selected {
+      background: var(--verde-claro);
+      color: var(--blanco);
+      border-color: transparent;
+    }
+
+    .campo {
+      margin-bottom: 0.9rem;
+    }
+
+    .campo label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .campo input, .campo select, .campo textarea {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 0.7rem;
+      border: 1px solid #cccccc;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .campo input:focus, .campo select:focus, .campo textarea:focus {
+      border-color: var(--verde-claro);
+    }
+
+    .resultados-demo {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .beneficios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .beneficio-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .beneficio-item p {
+      font-size: 0.9rem;
+    }
+
+    footer {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      padding: 1.5rem 2rem;
+      font-size: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    footer .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer a {
+      color: var(--amarillo-tierra);
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .filtros-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      nav ul {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-box">
+      <img src="logo-gaucho.png" alt="Logo ManoRural">
+      <div class="logo-text">ManoRural</div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#objetivo">Objetivo</a></li>
+        <li><a href="#usuarios">Usuarios</a></li>
+        <li><a href="#filtros">Filtros</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+      </ul>
+    </nav>
+    <button class="btn-header">Ingresar</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Conectamos trabajadores rurales con empleadores del campo</h1>
+        <p>
+          Una plataforma pensada para el agro: peones, capataces y trabajadores rurales pueden mostrar sus habilidades; productores y estancieros encuentran la mano de obra que necesitan, en la zona correcta.
+        </p>
+        <div class="hero-badges">
+          <span class="badge">Alambradores</span>
+          <span class="badge">Maquinaria</span>
+          <span class="badge">Ganado</span>
+          <span class="badge">Tambo</span>
+        </div>
+        <div class="hero-buttons">
+          <button class="btn-primary">Soy trabajador rural</button>
+          <button class="btn-secondary">Soy empleador</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-visual-inner">
+          <img src="logo-gaucho-color.png" alt="Logo ManoRural a color">
+          <p>Usamos colores, símbolos y lenguaje del campo uruguayo para crear una plataforma cercana, simple y confiable.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="objetivo">
+      <h2 class="section-title">Objetivo de la plataforma</h2>
+      <p class="section-subtitle">
+        Queremos hacer más fácil y transparente la conexión entre quienes buscan trabajo en el campo y quienes necesitan mano de obra rural.
+      </p>
+      <div class="objetivo-box">
+        <p><strong>Nuestro objetivo</strong> es que ningún trabajador rural quede sin mostrar lo que sabe hacer, y que ningún productor se quede sin encontrar a la persona adecuada para su campo.</p>
+        <p>Centralizamos perfiles, habilidades y ubicaciones para que el encuentro sea más rápido, claro y justo para ambas partes.</p>
+      </div>
+    </section>
+
+    <section id="usuarios">
+      <h2 class="section-title">¿Para quién es ManoRural?</h2>
+      <p class="section-subtitle">
+        La plataforma está pensada tanto para trabajadores rurales que buscan oportunidades como para empleadores que necesitan cubrir puestos.
+      </p>
+      <div class="usuarios-grid">
+        <div class="card">
+          <span class="pill">Trabajador rural</span>
+          <h3>Soy trabajador y quiero que me contraten</h3>
+          <p>Crea tu perfil en pocos minutos, marcando tus oficios y en qué zona estás.</p>
+          <ul>
+            <li>Indicá tus habilidades: alambrar, maquinaria, ganado, tambo, esquila y más.</li>
+            <li>Definí tu disponibilidad y si trabajás por jornal, zafra o fijo.</li>
+            <li>Recibí contactos directos de empleadores rurales.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="pill">Empleador / productor</span>
+          <h3>Soy empleador y busco trabajadores</h3>
+          <p>Encontrá perfiles filtrando por habilidades y ubicación, sin perder tiempo.</p>
+          <ul>
+            <li>Buscá por oficios concretos que necesitás en tu campo.</li>
+            <li>Filtrá por departamento y distancia aproximada.</li>
+            <li>Contactá directamente a los trabajadores que mejor encajan.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="filtros">
+      <h2 class="section-title">Filtros por habilidades y ubicación</h2>
+      <p class="section-subtitle">
+        Tanto trabajadores como empleadores pueden usar filtros claros para buscar y ofrecer servicios rurales.
+      </p>
+
+      <div class="filtros-wrapper">
+        <div class="filtros-box">
+          <h3>Probá el filtro (demo)</h3>
+          <div class="toggle-usuarios">
+            <button class="active" type="button">Busco trabajadores</button>
+            <button type="button">Busco empleo</button>
+          </div>
+
+          <p style="font-size:0.85rem;margin-bottom:0.5rem;">
+            Seleccioná habilidades para ver cómo se filtrarían los perfiles:
+          </p>
+
+          <div class="chips">
+            <div class="chip">Alambradores</div>
+            <div class="chip">Manejo de maquinaria</div>
+            <div class="chip">Caravanear</div>
+            <div class="chip">Capar</div>
+            <div class="chip">Vacunar</div>
+            <div class="chip">Arreo de ganado</div>
+            <div class="chip">Esquila</div>
+            <div class="chip">Tambo / ordeñe</div>
+            <div class="chip">Siembra</div>
+            <div class="chip">Cosecha</div>
+            <div class="chip">Mantenimiento de molinos</div>
+            <div class="chip">Tareas generales</div>
+          </div>
+
+          <div class="campo">
+            <label for="ubicacion">Ubicación</label>
+            <input id="ubicacion" type="text" placeholder="Ej: Florida, Durazno, Paysandú..." />
+          </div>
+          <div class="campo">
+            <label for="radio">Radio aproximado (km)</label>
+            <select id="radio">
+              <option value="">Seleccionar</option>
+              <option value="20">Hasta 20 km</option>
+              <option value="50">Hasta 50 km</option>
+              <option value="100">Hasta 100 km</option>
+              <option value="200">Más de 100 km</option>
+            </select>
+          </div>
+
+          <button class="btn-primary" style="margin-top:0.5rem;">Buscar</button>
+          <p class="resultados-demo" style="margin-top:0.7rem;">
+            (En la versión final, aquí verías una lista de trabajadores o empleos que coinciden con los filtros seleccionados.)
+          </p>
+        </div>
+
+        <div class="filtros-box">
+          <h3>¿Qué puede filtrar cada usuario?</h3>
+          <p style="font-size:0.9rem;">
+            <strong>Trabajadores rurales</strong> pueden:
+          </p>
+          <ul style="font-size:0.85rem; margin-left:1.1rem; margin-bottom:0.75rem;">
+            <li>Marcar todas las habilidades que tienen.</li>
+            <li>Indicar en qué departamento y zona están.</li>
+            <li>Añadir detalles en un texto libre (experiencias, campos donde trabajaron, referencias).</li>
+          </ul>
+
+          <p style="font-size:0.9rem;">
+            <strong>Empleadores / productores</strong> pueden:
+          </p>
+          <ul style="font-size:0.85rem; margin-left:1.1rem;">
+            <li>Filtrar por habilidades específicas necesarias.</li>
+            <li>Definir ubicación y radio de búsqueda en km.</li>
+            <li>Guardar favoritos o contactar directamente desde la plataforma.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios">
+      <h2 class="section-title">Beneficios para ambos lados</h2>
+      <p class="section-subtitle">
+        ManoRural busca mejorar la vida en el campo haciendo más fácil encontrar y ofrecer trabajo rural.
+      </p>
+      <div class="beneficios-grid">
+        <div class="beneficio-item">
+          <h4>Para trabajadores rurales</h4>
+          <p>
+            Más visibilidad de tus habilidades, más oportunidades y contacto directo con empleadores que valoran tu experiencia.
+          </p>
+        </div>
+        <div class="beneficio-item">
+          <h4>Para empleadores</h4>
+          <p>
+            Encontrás el perfil adecuado en menos tiempo, con filtros claros por oficio y ubicación, reduciendo el riesgo de malas contrataciones.
+          </p>
+        </div>
+        <div class="beneficio-item">
+          <h4>Para el campo en general</h4>
+          <p>
+            Una herramienta pensada desde el agro para el agro, apoyando el trabajo rural, la formalidad y el desarrollo de las comunidades del interior.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year"></span> ManoRural - Plataforma para trabajo rural.</span>
+      <span>Contacto: <a href="mailto:contacto@manorural.com">contacto@manorural.com</a></span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const chips = document.querySelectorAll(".chip");
+    chips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        chip.classList.toggle("selected");
+      });
+    });
+
+    const toggleButtons = document.querySelectorAll(".toggle-usuarios button");
+    toggleButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        toggleButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
